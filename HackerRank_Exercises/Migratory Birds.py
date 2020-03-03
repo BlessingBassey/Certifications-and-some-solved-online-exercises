@@ -7,7 +7,7 @@
 import numpy as np
 
 def migratoryBirds(arr):
-    dic = {}                # get the elements and their respective counts ina dictionary
+    dic = {}                # get the elements and their respective counts in a dictionary
     for i in arr:
         if i not in dic:
             dic[i] = 1
@@ -29,9 +29,6 @@ def migratoryBirds(arr):
 # Example
 arr = np.array([5 ,11, 1, 2,9,9,9, 3, 4, 8, 4, 3, 2, 1, 3, 4])
 migratoryBirds(arr)
-
-
-# In[ ]:
 
 
 
