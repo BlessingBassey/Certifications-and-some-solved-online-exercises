@@ -1,34 +1,44 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[84]:
+# In[204]:
 
 
 import numpy as np
 
-def migratoryBirds(arr):
-    dic = {}                # get the elements and their respective counts in a dictionary
-    for i in arr:
-        if i not in dic:
-            dic[i] = 1
-        else:
-            dic[i] = dic[i] + 1
+def dayOfProgrammer(year):
+    day_of_pro = 256
+    leap_year = [31,29,31,30,31,30,31,31]
     
-    initial_k, initial_v = arr[0], dic[arr[0]]      # randomly pick any initialization
-    for k,v in dic.items():
-        if (v > initial_v) or (v == initial_v and k < initial_k):   # note all the conditions
-            initial_k, initial_v = k, v
+    if year == 1918:     # This is a special case, because of the trasition. 
+        day_of_month = (day_of_pro - sum(leap_year)) + 1 + 13        
+    
+    if year in range (1700,1918):     #This is the Julian calender
+        if year % 4 == 0:        
+            day_of_month = day_of_pro - sum(leap_year)
+
+        if year % 4 != 0 :
+            day_of_month = (day_of_pro - sum(leap_year)) + 1
             
-    print('The dictionary' ,dic)
-    print("--------------------------------------------------------------------------------------------")
-    print(dic.items())
-    print("----------------------------------------------------------------------------------------------")
-    print('The smallet key with the maximum elemet is:', initial_k)      
+    if year in range (1919,2701):     # This is the Gregorian calender
+        if year % 400 == 0 or (year % 4 == 0 and year % 100 != 0):        
+            day_of_month = day_of_pro - sum(leap_year)
+
+        else:
+            day_of_month = (day_of_pro - sum(leap_year)) + 1
+
+    return (str(day_of_month) + '.' +'0'+ str(len(leap_year)+1) + '.'+ str(year))
     
-    
-# Example
-arr = np.array([5 ,11, 1, 2,9,9,9, 3, 4, 8, 4, 3, 2, 1, 3, 4])
-migratoryBirds(arr)
+
+# Examples
+print(dayOfProgrammer(1918))
+print(dayOfProgrammer(2017))
+print(dayOfProgrammer(2016))
+print(dayOfProgrammer(1970))
+print(dayOfProgrammer(2700))
+
+
+# In[ ]:
 
 
 
